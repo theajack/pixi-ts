@@ -1,33 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
+const {resolve, rules, entry, output} = require('./common');
 
 module.exports = {
     mode: 'production',
-    entry: path.resolve('./', 'src/index.ts'),
-    output: {
-        path: path.resolve('./', 'dist'),
-        filename: 'main.min.js',
-        library: 'WXMiniGameTs',
-        libraryTarget: 'umd',
-        libraryExport: 'default',
-        globalObject: 'this',
-    },
+    entry,
+    output,
     externals: {
     },
     module: {
-        rules: [{
-            test: /(.ts)$/,
-            use: {
-                loader: 'ts-loader'
-            }
-        }, {
-            test: /(.js)$/,
-            use: [{
-                loader: 'babel-loader',
-            }]
-        }]
+        rules
     },
-    resolve: {
-        extensions: [ '.tsx', '.ts', '.js' ],
-    },
+    resolve
 };

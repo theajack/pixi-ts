@@ -1,0 +1,9 @@
+{
+    "path-intellisense.mappings": {
+        "@lib": "${workspaceRoot}/lib/*",
+        "@lib-types": "${workspaceRoot}/lib/types/*",
+        "@adapter": "${workspaceRoot}/lib/adapter/index.ts",
+        "@types": "${workspaceRoot}/src/types/*"
+    }
+}
+  

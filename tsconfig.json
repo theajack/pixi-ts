@@ -19,12 +19,19 @@
         "lib": ["esnext", "dom"],
         "rootDir": ".",
         "noEmit": false,
+        "paths": {
+            "@lib/*": ["lib/*"],
+            "@lib-types/*": ["lib/types/*"],
+            "@adapter": ["lib/adapter/index.ts"],
+            "@types/*": ["src/types/*"],
+        }
     },
     "include": [
         "src/**/*",
+        "lib/**/*",
         // "src/index.ts",
         "game.js"
-    ],
+, "lib/types/wx.d.ts"    ],
     "exclude": [
         "./node_modules",
     ]
