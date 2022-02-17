@@ -2,17 +2,13 @@
  * @Author: tackchen
  * @Date: 2022-02-18 01:05:32
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-18 01:10:09
+ * @LastEditTime: 2022-02-18 01:20:58
  * @FilePath: /pixi-ts/lib/types/pixi.hacker.d.ts
  * @Description: Coding something
  */
 
-import {CGraphics} from './pixi.math';
+import {Sprite} from 'pixi.js';
+import {ICollision} from './pixi.collision';
 
-export interface ISprite {
-    ax: number;
-    ay: number;
-
-    isCircle: boolean;
-    graphics: CGraphics;
+export interface ISprite extends Sprite, ICollision {
 }

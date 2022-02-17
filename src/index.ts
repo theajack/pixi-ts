@@ -7,8 +7,9 @@
  */
 
 import Adapter from '@adapter';
-import {Application, Rectangle, Sprite, utils} from 'pixi.js';
+import {Application, Rectangle, utils} from 'pixi.js';
 import '@lib/plugin/pixi-collision';
+import {Sprite} from '@lib/plugin/pixi-hacker';
 const WIN = (window as any);
 
 const renderView = Adapter.getRenderView();
@@ -47,22 +48,18 @@ function setup () {
     texture.frame = rectangle;
   
     // Create the sprite from the texture
+    
     const rocket = new Sprite(texture);
-    // Position the rocket sprite on the canvas
     rocket.x = 100;
     rocket.y = 0;
-
-    rocket.initCollision();
-
     WIN.rocket = rocket;
+    app.stage.addChild(rocket);
 
     
     const rocket2 = new Sprite(texture);
-    rocket2.initCollision();
     WIN.rocket2 = rocket2;
   
     // Add the rocket to the stage
-    app.stage.addChild(rocket);
     app.stage.addChild(rocket2);
     
     // Render the stage
@@ -72,13 +69,13 @@ function setup () {
     // app.stage.addChild(enemy);
 
     // enemy.width = 100;
-    // app.ticker.add((delta) => {
-    //     // console.log(delta);
-    //     rocket2.collision.x += 1;
-    //     if (rocket2.hitAnotherSprite(rocket)) {
-    //         console.log('撞到啦');
-    //     }
-    // });
+    app.ticker.add(() => {
+        // console.log(delta);
+        rocket2.x += 1;
+        if (rocket2.hitAnotherSprite(rocket)) {
+            console.log('撞到啦');
+        }
+    });
 }
 
 
