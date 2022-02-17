@@ -2,14 +2,18 @@
  * @Author: tackchen
  * @Date: 2022-02-16 21:57:53
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-17 08:48:10
+ * @LastEditTime: 2022-02-18 00:25:17
  * @FilePath: /pixi-ts/lib/plugin/pixi-math/graphics/point.ts
  * @Description: Coding something
  */
 
-import {CPoint, CRectangle} from '@lib/types/pixi.math';
+import {CPoint} from '@lib/types/pixi.math';
 import {countSumOfSquare} from '../math';
+import {Graphics} from './graphics';
+// import {Graphics} from './graphics';
 
+// const a: CTest = {};
+// console.log(a);
 export class Point implements CPoint {
     x: number;
     y: number;
@@ -21,8 +25,8 @@ export class Point implements CPoint {
     setX (x: number) { this.x = x; }
     setY (y: number) { this.y = y; }
 
-    isInRectangle (rect: CRectangle): boolean {
-        return rect.isContainPoint(this);
+    isInGraphics (graphics: Graphics): boolean {
+        return graphics.isContainPoint(this);
     }
 
     countDistanceSqureToPoint (point: Point) {

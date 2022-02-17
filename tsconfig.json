@@ -15,6 +15,8 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "removeComments": false,
+        // "declaration": true,
+        // "declarationDir": "./dist/types/",
         "jsx": "preserve",
         "lib": ["esnext", "dom"],
         "rootDir": ".",
@@ -31,7 +33,7 @@
         "lib/**/*",
         // "src/index.ts",
         "game.js"
-, "lib/types/wx.d.ts"    ],
+    ],
     "exclude": [
         "./node_modules",
     ]

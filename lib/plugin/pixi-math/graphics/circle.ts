@@ -2,7 +2,7 @@
  * @Author: tackchen
  * @Date: 2022-02-16 22:02:24
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-17 08:17:35
+ * @LastEditTime: 2022-02-18 00:55:50
  * @FilePath: /pixi-ts/lib/plugin/pixi-math/graphics/circle.ts
  * @Description: Coding something
  */
@@ -15,33 +15,38 @@
  * @Description: Coding something
  */
 
-import {CCircle, CRectangle} from '@lib/types/pixi.math';
+import {CCircle} from '@lib/types/pixi.math';
+import {Graphics} from './graphics';
 import {Point} from './point';
-import {Rectangle} from './rectangle';
 
-export class Circle implements CCircle {
-    x: number;
-    y: number;
-    radius: number;
+export class Circle extends Graphics implements CCircle {
+    type = 2;
+    diameter: number;
 
+    _radius: number;
     _radiusSqure: number;
-    _diameter: number;
 
-    _boundary: CRectangle;
-    
-
-    constructor (x: number, y: number, radius: number) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this._boundary = new Rectangle(x, y, radius, radius);
+    constructor (x: number, y: number, diameter: number) {
+        super(x, y, diameter, diameter);
+        this._initDiameter(diameter);
     }
 
     isContainPoint (point: Point) {
-        if (!this._boundary.isContainPoint(point)) {
+        if (!super.isContainPoint(point)) {
             return false;
         }
+        return this._origin.countDistanceSqureToPoint(point) < this._radiusSqure;
+    }
 
-        return this._boundary._origin.countDistanceSqureToPoint(point) < this._radiusSqure;
+    setDiameter (diameter: number) {
+        this.setWidth(diameter);
+        this.setHeight(diameter);
+        this._initDiameter(diameter);
+    }
+    
+    private _initDiameter (diameter: number) {
+        this.diameter = diameter;
+        this._radius = diameter / 2;
+        this._radiusSqure = this._radius * this._radius;
     }
 };

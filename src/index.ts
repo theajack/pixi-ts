@@ -49,8 +49,8 @@ function setup () {
     // Create the sprite from the texture
     const rocket = new Sprite(texture);
     // Position the rocket sprite on the canvas
-    rocket.x = 46;
-    rocket.y = 46;
+    rocket.x = 100;
+    rocket.y = 0;
 
     rocket.initCollision();
 
@@ -72,5 +72,24 @@ function setup () {
     // app.stage.addChild(enemy);
 
     // enemy.width = 100;
-
+    // app.ticker.add((delta) => {
+    //     // console.log(delta);
+    //     rocket2.collision.x += 1;
+    //     if (rocket2.hitAnotherSprite(rocket)) {
+    //         console.log('撞到啦');
+    //     }
+    // });
 }
+
+
+class Test {
+    private _x: number;
+    get x () {
+        return this._x;
+    }
+    set x (v) {
+        this._x = v;
+    }
+}
+
+WIN.t = new Test();

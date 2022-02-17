@@ -2,12 +2,12 @@
  * @Author: tackchen
  * @Date: 2022-02-16 22:53:00
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-17 08:54:23
+ * @LastEditTime: 2022-02-18 00:59:31
  * @FilePath: /pixi-ts/lib/plugin/pixi-collision/index.ts
  * @Description: Coding something
  */
 // import '@lib-types/pixi.collision';
-import {IInitCollisionOption} from '@lib/types/pixi.collision';
+import {ICollision, IInitCollisionOption} from '@lib/types/pixi.collision';
 import {Sprite} from 'pixi.js';
 import {Circle} from '../pixi-math/graphics/circle';
 import {Rectangle} from '../pixi-math/graphics/rectangle';
@@ -16,47 +16,63 @@ import {Rectangle} from '../pixi-math/graphics/rectangle';
 Sprite.prototype.initCollision = function ({isCircle = false}: IInitCollisionOption = {}) {
     const {x, y, width, height} = this;
 
-    this.collision = {
-        isCircle,
-        x: 0,
-        y: 0,
-        width: 0,
-        height: 0,
-    };
-    Object.defineProperties(this.collision, {
-        x: {
-            get: () => {
-                return this.collision?.rectangle?.x;
-            },
-            set: (v: number) => {
+    this.collision = initCollisionProperties.call(this);
+    this.collision.isCircle = isCircle;
+    this.collision.graphics = isCircle ?
+        new Circle(x, y, width) :
+        new Rectangle(x, y, width, height);
 
+};
+
+function initCollisionProperties (this: Sprite): ICollision {
+    const collision = {};
+
+    Object.defineProperties(collision, {
+        x: {
+            get: () => this.x,
+            set: (v: number) => {
+                this.x = v;
+                this.collision.graphics.setX(v);
+            }
+        },
+        y: {
+            get: () => this.y,
+            set: (v: number) => {
+                this.y = v;
+                this.collision.graphics.setY(v);
+            }
+        },
+        width: {
+            get: () => this.width,
+            set: (v: number) => {
+                this.width = v;
+                this.collision.graphics.setWidth(v);
+            }
+        },
+        height: {
+            get: () => this.height,
+            set: (v: number) => {
+                this.height = v;
+                this.collision.graphics.setHeight(v);
             }
         }
     });
-    if (isCircle) {
-        this.collision.circle = new Circle(x, y, width);
-    } else {
-        this.collision.rectangle = new Rectangle(x, y, width, height);
-    }
-};
 
-Sprite.prototype.hitAnotherSprite = function (sprite: Sprite) {
-    if (!sprite.collision || !this.collision) {
+    return collision as ICollision;
+}
+
+Sprite.prototype.hitAnotherSprite = function (target: Sprite) {
+    if (!target.collision || !this.collision) {
         console.warn('请先初始化精灵碰撞体');
         return false;
     }
 
-    sprite.x;
+    const {collision} = target;
 
-    const {collision} = sprite;
-
-    if (collision.isCircle) {
+    if (collision.isCircle && this.collision.isCircle ) {
         return false; // todo 待处理圆形的碰撞逻辑
     }
 
-    const thisRect = collision.rectangle as Rectangle;
-    const targetRect = sprite.collision.rectangle as Rectangle;
-
-    return thisRect.isBumpRectangle(targetRect);
+    return this.collision.graphics.isBumpAnthorGraphics(collision.graphics);
 };
 
