@@ -8,6 +8,7 @@
 
 import Adapter from '@adapter';
 import {Application, Rectangle, Sprite, utils} from 'pixi.js';
+import '@lib/plugin/pixi-collision';
 const WIN = (window as any);
 
 const renderView = Adapter.getRenderView();
@@ -47,13 +48,22 @@ function setup () {
   
     // Create the sprite from the texture
     const rocket = new Sprite(texture);
-    
     // Position the rocket sprite on the canvas
-    rocket.x = 32;
-    rocket.y = 32;
+    rocket.x = 46;
+    rocket.y = 46;
+
+    rocket.initCollision();
+
+    WIN.rocket = rocket;
+
+    
+    const rocket2 = new Sprite(texture);
+    rocket2.initCollision();
+    WIN.rocket2 = rocket2;
   
     // Add the rocket to the stage
     app.stage.addChild(rocket);
+    app.stage.addChild(rocket2);
     
     // Render the stage
     app.renderer.render(app.stage);
