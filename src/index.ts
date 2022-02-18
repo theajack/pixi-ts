@@ -7,9 +7,10 @@
  */
 
 import Adapter from '@adapter';
-import {Application, Rectangle, utils} from 'pixi.js';
+import {Rectangle, utils} from 'pixi.js';
 import '@lib/plugin/pixi-collision';
-import {Sprite} from '@lib/plugin/pixi-hacker';
+import {Sprite} from '@lib/plugin/pixi-pro/sprite';
+import {Application} from '@lib/plugin/pixi-pro/application';
 const WIN = (window as any);
 
 const renderView = Adapter.getRenderView();
@@ -54,7 +55,6 @@ function setup () {
     rocket.y = 0;
     WIN.rocket = rocket;
     app.stage.addChild(rocket);
-
     
     const rocket2 = new Sprite(texture);
     WIN.rocket2 = rocket2;
@@ -69,24 +69,11 @@ function setup () {
     // app.stage.addChild(enemy);
 
     // enemy.width = 100;
-    app.ticker.add(() => {
-        // console.log(delta);
-        rocket2.x += 1;
-        if (rocket2.hitAnotherSprite(rocket)) {
-            console.log('撞到啦');
-        }
-    });
+    // app.ticker.add(() => {
+    //     // console.log(delta);
+    //     rocket2.x += 1;
+    //     if (rocket2.hitAnotherSprite(rocket)) {
+    //         console.log('撞到啦');
+    //     }
+    // });
 }
-
-
-class Test {
-    private _x: number;
-    get x () {
-        return this._x;
-    }
-    set x (v) {
-        this._x = v;
-    }
-}
-
-WIN.t = new Test();
