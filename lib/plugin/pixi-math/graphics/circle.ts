@@ -2,7 +2,7 @@
  * @Author: tackchen
  * @Date: 2022-02-16 22:02:24
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-18 00:55:50
+ * @LastEditTime: 2022-02-19 00:09:09
  * @FilePath: /pixi-ts/lib/plugin/pixi-math/graphics/circle.ts
  * @Description: Coding something
  */
@@ -16,11 +16,12 @@
  */
 
 import {CCircle} from '@lib/types/pixi.math';
+import {GraphicsType} from '@lib/utils/enum';
 import {Graphics} from './graphics';
 import {Point} from './point';
 
 export class Circle extends Graphics implements CCircle {
-    type = 2;
+    type = GraphicsType.Circle;
     diameter: number;
 
     _radius: number;
@@ -48,5 +49,8 @@ export class Circle extends Graphics implements CCircle {
         this.diameter = diameter;
         this._radius = diameter / 2;
         this._radiusSqure = this._radius * this._radius;
+    }
+    countArea () {
+        return Math.PI * this._radius * this._radius;
     }
 };

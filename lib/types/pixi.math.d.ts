@@ -2,15 +2,12 @@
  * @Author: tackchen
  * @Date: 2022-02-16 21:58:51
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-18 00:24:53
+ * @LastEditTime: 2022-02-19 00:08:01
  * @FilePath: /pixi-ts/lib/types/pixi.math.d.ts
  * @Description: Coding something
  */
 
-export enum GraphicsType {
-    Rectangle,
-    Circle,
-}
+import {GraphicsType} from '@lib/utils/enum';
 
 export interface IPoint {
     x: number;
@@ -60,6 +57,7 @@ export abstract class CGraphics implements IPoint, ISize, ISetPosition, ISetSize
     setHeight(v: number): void;
     isContainPoint (point: CPoint): boolean;
     isBumpAnthorGraphics (rect: CGraphics): boolean;
+    countArea(): number;
 }
 
 export abstract class CRectangle extends CGraphics {

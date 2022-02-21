@@ -2,7 +2,7 @@
  * @Author: tackchen
  * @Date: 2022-02-15 22:32:26
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-17 23:44:15
+ * @LastEditTime: 2022-02-20 22:37:55
  * @FilePath: /pixi-ts/webpack-config/common.js
  * @Description: Coding something
  */
@@ -30,7 +30,7 @@ const rules = [{
     }]
 }];
 
-const entry = path.resolve('./', 'src/index.ts');
+const entry = path.resolve('./', 'src/index.old.ts');
 
 const output = {
     path: path.resolve('./', 'dist'),

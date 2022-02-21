@@ -2,23 +2,31 @@
  * @Author: tackchen
  * @Date: 2022-02-15 22:57:08
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-15 23:33:23
+ * @LastEditTime: 2022-02-19 20:56:19
  * @FilePath: /pixi-ts/lib/adapter/web/index.ts
  * @Description: Coding something
  */
 
 import {IAdapter} from '@lib-types/adapter';
+import {ISize} from '@lib/types/util';
 import {isWebEnv} from '@lib/utils/util';
+
+let viewObject: ISize & {view: HTMLCanvasElement};
 
 const WebAdapter: IAdapter = {
     getRenderView () {
-        const size = this.getScreenSize();
-        const canvas = document.createElement('canvas');
-        document.body.appendChild(canvas);
-        return {
-            ...size,
-            view: canvas,
-        };
+        if (!viewObject) {
+            const size = this.getScreenSize();
+            const canvas = document.createElement('canvas');
+            document.body.appendChild(canvas);
+            canvas.width = size.width;
+            canvas.height = size.height;
+            viewObject = {
+                ...size,
+                view: canvas,
+            };
+        }
+        return viewObject;
     },
     getScreenSize () {
         return {

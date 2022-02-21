@@ -2,14 +2,14 @@
  * @Author: tackchen
  * @Date: 2022-02-17 23:15:21
  * @LastEditors: tackchen
- * @LastEditTime: 2022-02-18 00:38:24
+ * @LastEditTime: 2022-02-19 00:08:43
  * @FilePath: /pixi-ts/lib/plugin/pixi-math/graphics/graphics.ts
  * @Description: Coding something
  */
 
-import {CGraphics, GraphicsType} from '@lib/types/pixi.math';
+import {CGraphics} from '@lib/types/pixi.math';
+import {GraphicsType} from '@lib/utils/enum';
 import {Point} from './point';
-
 export class Graphics implements CGraphics {
     type: GraphicsType;
     x: number;
@@ -64,5 +64,9 @@ export class Graphics implements CGraphics {
             return false;
         }
         return true;
+    }
+
+    countArea () {
+        return this.width * this.height;
     }
 }
